@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation - Remita</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #c75534;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-dot {
+            color: #4db8a8;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .page-title {
+            color: #c75534;
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .success-banner {
+            background-color: #2d5e3f;
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .institution-name {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin: 40px 0;
+            line-height: 1.4;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 30px 0;
+        }
+
+        .info-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .reference-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 2px;
+        }
+
+        .payment-details-header {
+            background-color: #e8653f;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            margin: 30px 0 0 0;
+        }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .details-table th {
+            background-color: #d9d9d9;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .details-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .details-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount-right {
+            text-align: right;
+        }
+
+        .total-row {
+            background-color: #d9d9d9;
+        }
+
+        .total-row td {
+            font-size: 28px;
+            font-weight: bold;
+            padding: 20px 15px;
+        }
+
+        .show-details {
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .print-button {
+            background-color: #1a8a7a;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
+        .contact-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .contact-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .licensed {
+            color: #e8653f;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .address, .email {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .links {
+            color: #666;
+            margin: 30px 0;
+        }
+
+        .links a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .connect-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e8653f;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #c75534;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .app-button {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            background-color: white;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .app-button:hover {
+            background-color: #f5f5f5;
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">remita<span class="logo-dot">.</span></div>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Payment Confirmation</h1>
+
+        <div class="success-banner">
+            ⓘ Payment Successful -successful ⓘ
+        </div>
+
+        <div class="institution-name">
+            NATIONAL INSTITUTE<br>
+            OF CONSTRUCTION<br>
+            TECHNOLOGY
+        </div>
+
+        <hr class="divider">
+
+        <div class="info-section">
+            <div class="info-label">Generated on 2/1/2026</div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Remita Retrieval Reference</div>
+            <div class="reference-number">1111-9077-8880</div>
+        </div>
+
+        <div class="payment-details-header">Payment Details</div>
+
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th class="amount-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ACCOMMODATION FEE</td>
+                    <td class="amount-right">NGN 75,000.00</td>
+                </tr>
+                <tr>
+                    <td>Charges</td>
+                    <td class="amount-right">NGN 150.00</td>
+                </tr>
+                <tr>
+                    <td>Vat On Charges</td>
+                    <td class="amount-right">NGN 11.25</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Total Amount</td>
+                    <td class="amount-right">NGN 75,161.25</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="show-details">↓ Show Details</div>
+
+        <button class="print-button">
+            <span>🖨</span> PRINT RECEIPT
+        </button>
+    </div>
+
+    <div class="contact-section">
+        <div class="container">
+            <h2 class="contact-title">Contact Us</h2>
+            
+            <div class="company-name">Remita Payment Services Limited</div>
+            <div class="licensed">Licensed by the Central Bank of Nigeria</div>
+            
+            <div class="address">
+                Plot B22 Chief Yesufu Abiodun Road, Oniru<br>
+                Victoria Island, Lagos, Nigeria
+            </div>
+            
+            <div class="email">info@remita.net</div>
+            
+            <div class="links">
+                <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+            </div>
+
+            <h2 class="connect-title">Connect With Us</h2>
+            
+            <div class="social-icons">
+                <a href="https://www.instagram.com/remitanet" target="_blank" class="social-icon">📷</a>
+                <a href="https://twitter.com/remitanet" target="_blank" class="social-icon">𝕏</a>
+                <a href="https://www.facebook.com/remitanet" target="_blank" class="social-icon">f</a>
+                <a href="https://www.linkedin.com/company/remita" target="_blank" class="social-icon">in</a>
+            </div>
+
+            <div class="app-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.systemspecs.remita" target="_blank" class="app-button">
+                    <span>▶</span>
+                    <div>
+                        <div style="font-size: 10px;">GET IT ON</div>
+                        <div style="font-weight: bold;">Google Play</div>
+                    </div>
+                </a>
+                <a href="https://apps.apple.com/ng/app/remita/id1455097275" target="_blank" class="app-button">
+                    <span>🍎</span>
+                    <div>
+                        <div style="font-size: 10px;">Download on the</div>
+                        <div style="font-weight: bold;">App Store</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="footer">
+                Copyright © 2026 SystemSpecs. All Rights Reserved<br>
+                Remita is a platform designed and developed by SystemSpecs.
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelector('.print-button').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+</body>
+</html>
